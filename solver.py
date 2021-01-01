@@ -1,3 +1,5 @@
+import random
+
 class Solver():
 
     def is_solved(self, grid):
@@ -49,7 +51,7 @@ class Solver():
         else:
             return False   
 
-    def solve_one_square(self, grid, candidates):
+    def solve(self, grid, candidates=[1,2,3,4,5,6,7,8,9]):
 
         if self.is_solved(grid):
             return True
@@ -66,10 +68,6 @@ class Solver():
                 grid[row][col] = "0"
             
         return False
-
-    def solve(self, grid):
-
-        return self.solve_one_square(grid, range(1,10))
 
 if __name__ == "__main__":
 
