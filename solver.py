@@ -62,7 +62,7 @@ class Solver():
             if self.test_insertion(grid, row, col, candidate):
 
                 grid[row][col] = str(candidate)
-                if self.solve(grid):
+                if self.solve(grid, candidates):
                     return True
             else:
                 grid[row][col] = "0"
