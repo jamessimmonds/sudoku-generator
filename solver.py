@@ -1,7 +1,7 @@
 class Solver():
 
     def is_solved(self, grid):
-        for row in sudoku:
+        for row in grid:
             if "0" in row:
                 return False
         return True
@@ -49,22 +49,27 @@ class Solver():
         else:
             return False   
 
-    def solve_next_square(self, grid):
+    def solve_one_square(self, grid, candidates):
 
         if self.is_solved(grid):
             return True
 
         row, col = self.next_unsolved(grid)
 
-        for candidate in range(1, 10):
+        for candidate in candidates:
             if self.test_insertion(grid, row, col, candidate):
+
                 grid[row][col] = str(candidate)
-                if self.solve_next_square(grid):
+                if self.solve(grid):
                     return True
             else:
                 grid[row][col] = "0"
             
         return False
+
+    def solve(self, grid):
+
+        return self.solve_one_square(grid, range(1,10))
 
 if __name__ == "__main__":
 
@@ -86,8 +91,6 @@ if __name__ == "__main__":
         stripped_line = [character for character in line if character != " "]
         sudoku.append(stripped_line)
 
-    print(sudoku)
-
     s = Solver()
-    s.solve_next_square(sudoku)
+    print(s.solve(sudoku))
     print(sudoku)
